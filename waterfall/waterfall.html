@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>非固定列布局</title>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <script src="https://cdn.bootcss.com/jquery/3.0.0-beta1/jquery.min.js"></script>
+    <style type="text/css">
+    #wrap {
+        margin-left: calc(100vw - 100%);
+        background-color: red;
+    }
+    
+    .container {
+        position: relative;
+        bottom: 0;
+        width: 1000px;
+        border: 1px solid red;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background: #ccc;
+    }
+
+    img {
+        position: absolute;
+    }
+    </style>
+    <script type="text/javascript">
+    $(function() {
+        var iWidth = 200;
+        var arrTop = [];
+        var iNum = 0;
+        var sUrl = 'http://www.wookmark.com/api/json/popular?callback=?';
+        var iPage = 0;
+        var bScroll = true;
+        var aIndex = [];
+        var iLoadNum = 0;
+        //计算列数
+        function getColNum() {
+            var iClientWidth = $(window).width();
+            iNum = Math.floor($(window).width() / (iWidth + 10));
+            if (iNum < 3) iNum = 3;
+            if (iNum > 7) iNum = 7;
+            $('.container').width((iWidth + 10) * iNum - 10);
+        }
+        getColNum();
+        //初始化arrTop
+        function initHeight() {
+            for (var i = 0; i < iNum; i++) {
+                arrTop[i] = 0;
+            }
+        }
+        initHeight();
+        //返回高度最低的列的索引
+        function getIndex() {
+            var iMin = Math.min.apply(null, arrTop);
+            for (var i = 0; i < iNum; i++) {
+                if (arrTop[i] == iMin)
+                    return i;
+            }
+        }
+        //获取图像数据
+        function getImage() {
+            if (!bScroll) {
+                return;
+            }
+            bScroll = false;
+            iPage++;
+
+            $.getJSON(sUrl, {
+                page: iPage
+            }, function(jData) {
+                $.each(jData, function(index, obj) {
+
+                    var oImg = $('<img/>');
+
+                    var oPreImg = new Image();
+                    oPreImg.src = obj.preview;
+                    oPreImg.onload = function() {
+                        //为某个图片加载完成添加标志
+                        iLoadNum++;
+                        var iShortIndex = getIndex();
+                        var iHeight = Math.floor(oPreImg.height * iWidth / oPreImg.width);
+                        oImg.attr('src', this.src);
+                        oImg.css({
+                            height: iHeight,
+                            width: iWidth
+                        });
+
+                        var iLeft = (iWidth + 10) * iShortIndex;
+                        var iTop = arrTop[iShortIndex] + 10;
+                        oImg.css({
+                            left: iLeft,
+                            top: iTop
+                        });
+                        $(".container").append(oImg);
+
+                        arrTop[iShortIndex] += oImg.height() + 10;
+
+                        // console.log("success"+iLoadNum);
+                        if (iLoadNum == jData.length) {
+                            bScroll = true;
+                            console.log(iLoadNum);
+                            iLoadNum = 0;
+                            $(window).scrollTop(0);
+
+                        }
+
+                    }
+                    oPreImg.onerror = function() {
+                        iLoadNum++;
+                        /*console.log("error"+iLoadNum);*/
+                    }
+
+                });
+            });
+
+        }
+        getImage();
+
+        $(window).on('scroll', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+
+            if ((Math.min.apply(null, arrTop) + 30) < ($(window).scrollTop() + $(window).innerHeight())) {
+                getImage();
+            }
+
+        });
+
+
+
+        $(window).on('resize', function() {
+            var iLen = iNum;
+            getColNum();
+            if (iLen == iNum) {
+                return;
+            }
+            arrTop = [];
+            var arrLeft = [];
+            for (var i = 0; i < iNum; i++) {
+                arrTop[i] = 0;
+                arrLeft[i] = (iWidth + 10) * i;
+            }
+            $('.container').find('img').each(function() {
+
+                var _index = getIndex();
+
+                $(this).animate({
+                    left: arrLeft[_index],
+                    top: arrTop[_index]
+                }, 1000);
+                arrTop[_index] += $(this).height() + 10;
+
+            });
+        })
+
+
+
+    })
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="container">
+        </div>
+    </div>
+</body>
+
+</html>
