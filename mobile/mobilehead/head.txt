@@ -12,6 +12,7 @@
     <meta name="apple-mobile-web-app-title" content="title">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" /> <!-- 添加 favicon icon -->
 </head>
 <style type="text/css">
 html,
