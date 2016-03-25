@@ -1,0 +1,183 @@
+.fix:after {
+    content: "";
+    clear: both;
+    display: table;
+    height: 0;
+    font-size: 0;
+    overflow: hidden
+}
+
+.fix {
+    *zoom: 1;
+}
+
+.clear {
+    clear: both;
+    font-size: 0;
+    line-height: 0;
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+.poa {
+    position: absolute;
+}
+
+.por {
+    position: relative;
+}
+
+.gradient {
+    background: -webkit-linear-gradient(top, #fcfcfc, #fefefe);
+    background: -o-linear-gradient(top, #fcfcfc, #fefefe);
+    background: -moz-linear-gradien(top, #fcfcfc, #fefefe);
+    background: linear-gradient(to top, #fcfcfc, #fefefe);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#fefefe', GradientType='1');
+    +background: #fcfcfc;
+}
+
+
+/* 三角形的公共参数 */
+
+.triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: block;
+    overflow: hidden;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
+
+.triangle-up {
+    border-bottom: 4px solid #ca0309;
+}
+
+.triangle-down-gray {
+    border-top: 4px solid #c1c1c1;
+}
+
+.triangle-down-red {
+    border-top: 4px solid #ca0309;
+}
+
+
+/* 3个选项的tab选项 */
+
+.tab-3 {
+    position: relative;
+}
+
+.tab-3 .tab-3-head {
+    position: relative;
+    z-index: 2;
+}
+
+.tab-3 .tab-3-head li {
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    background: #f4f4f4;
+    border: 1px solid #dadada;
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.tab-3 .tab-3-head li.loc {
+    border-left: none;
+}
+
+.tab-3-con-div {
+    position: absolute;
+    border-top: 1px solid #dadada;
+}
+
+.tab-3-con-ul li {
+    border-top: 1px dotted #cbcbca;
+    position: relative;
+    height: 27px;
+    line-height: 27px;
+}
+
+
+/* 列表前点 */
+
+.dot {
+    width: 3px;
+    height: 3px;
+    position: absolute;
+    background: #d80000;
+}
+
+
+/*side shops common */
+
+.shops li {
+    position: relative;
+}
+
+.shops .shop-detail {
+    position: absolute;
+}
+
+.shops .shop-detail a {
+    height: 27px;
+    line-height: 27px;
+}
+
+.shops .shop-detail p {
+    line-height: 18px;
+}
+
+.shops .shop-detail em {
+    color: #999999;
+}
+
+.shops .shop-image {
+    border: 1px solid #cccccc;
+}
+
+.shops .onsale {
+    position: absolute;
+}
+
+
+/* side shop private */
+
+.side .shops .shop-detail {
+    position: absolute;
+    left: 107px;
+    top: 0;
+}
+
+.side .shop-detail a {
+    color: #b80000;
+}
+
+.side .shops .onsale {
+    left: 60px;
+    top: 38px;
+}
+
+.side .shops {
+    width: 214px;
+    height: 84px;
+    border-bottom: 1px dotted #cccccc;
+}
+
+.side .newin,
+.side .coupons,
+.side .cutoff,
+.side .advice,
+.side .threeD {
+    padding: 0 12px 0 12px;
+}
+
+
+/*side shops common*/
