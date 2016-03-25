@@ -157,38 +157,45 @@ input {
     </div>
 </body>
 <script type="text/javascript" class="sign">
-function jQueryCallback(data) {
-    // console.log(data);
-    $(".alert-div").css('display', 'block');
-    if ($(".alert-ul li").length < data.length) {
-        for (var i = 0; i < data.length - $(".alert-ul li").length; i++)
-            var re = $("<li></li>").appendTo('.alert-ul').addClass('alert-li');
-    }
-    if ($(".alert-ul li").length > data.length) {
-        for (var i = 0; i < $(".alert-ul li").length - data.length; i++)
-            $(".alert-li").eq(0).remove();
-    }
-    // var current=0;
-    $.each(data, function(index, obj) {
-        var re = $(".alert-ul li").eq(index).text(obj.value);
-    });
+var oTest = (function() {
+    function jQueryCallback(data) {
+        // console.log(data);
+        $(".alert-div").css('display', 'block');
+        if ($(".alert-ul li").length < data.length) {
+            for (var i = 0; i < data.length - $(".alert-ul li").length; i++)
+                var re = $("<li></li>").appendTo('.alert-ul').addClass('alert-li');
+        }
+        if ($(".alert-ul li").length > data.length) {
+            for (var i = 0; i < $(".alert-ul li").length - data.length; i++)
+                $(".alert-li").eq(i).remove();
+        }
+        // var current=0;
+        $.each(data, function(index, obj) {
+            var re = $(".alert-ul li").eq(index).text(obj.value);
+        });
 
-}
-var timer = null;
+    }
+    return {
+        jQueryCallback: jQueryCallback,
+        timer: null
+    }
+}())
+
 $(".text-btn").on('keyup', function(event) {
     event.preventDefault();
-    if (!timer) {
+    if (!oTest.timer) {
         setTimeout(function() {
             var srcStrbaidu = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' + $(".text-btn").val() + '&json=1&cb=jQueryCallback&' + $(".text-btn").val() + '&-=' + new Date().getTime();
-            var srcStrfeiniu = 'http://www.feiniu.com/ajax/autocomplete?term=' + $(".text-btn").val() + "&callback=" + 'jQueryCallback&-=' + new Date().getTime();
+            var srcStrfeiniu = 'http://www.feiniu.com/ajax/autocomplete?term=' + $(".text-btn").val() + "&callback=" + 'oTest.jQueryCallback&-=' + new Date().getTime();
             $("<script>").attr({
                 src: srcStrfeiniu
             }).insertBefore('.sign');
         }, 100);
     } else {
-        clearTimeout(timer);
+        clearTimeout(oTest.timer);
     }
 });
 </script>
-
+<!-- 我觉得最重要的是因为scipt的标签引用的函数必须在全局环境下才能找到，那么有什么办法可以不这样呢,我试试啊 -->
+<!-- 卧槽被我试成功了，卧槽，通过这种方式，变量便不会iwuran全局变量了，也就是说穿件一个自执行函数，里面同一放公共变量，这样避免了全局环境中变量的污染 -->
 </html>
