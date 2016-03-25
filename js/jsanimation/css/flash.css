@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    font: 12px Arial;
+    border-width: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #666;
+    overflow: hidden;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+#playimages {
+    background-color: #999;
+    width: 400px;
+    height: 432px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+
+.prev {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    margin-top: -30px;
+    width: 60px;
+    height: 60px;
+    background-attachment: fixed;
+    background: url(../images/btn.gif) no-repeat;
+    z-index: 3002;
+    opacity: 0;
+    filter: alpha(opacity= 0);
+    cursor: pointer;
+}
+
+.next {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -30px;
+    width: 60px;
+    height: 60px;
+    background-attachment: fixed;
+    background: url(../images/btn.gif) no-repeat 0 100%;
+    z-index: 3002;
+    opacity: 0;
+    filter: alpha(opacity= 0);
+    cursor: pointer;
+}
+
+.big_pic {
+    width: 400px;
+    height: 320px;
+    position: relative;
+}
+
+.small_pic {
+    position: relative;
+    top: 8px;
+    width: 400px;
+    height: 96px;
+    overflow: hidden;
+}
+
+.big_pic li {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 400px;
+    height: 320px;
+    background: url(../images/loading.gif);
+    overflow: hidden;
+}
+
+.text {
+    position: absolute;
+    left: 5px;
+    bottom: 4px;
+    color: #fff;
+    z-index: 3001;
+}
+
+.progressor {
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    color: #fff;
+    z-index: 3001;
+}
+
+#bg {
+    background-color: #000000;
+    width: 400px;
+    height: 25px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    filter: alpha(opacity= 60);
+    opacity: 0.6;
+    z-index: 3000
+}
+
+.small_pic ul {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 780px;
+    height: 96px;
+    overflow: hidden;
+    cursor:pointer;
+}
+
+.small_pic ul li {
+    float: left;
+    width: 120px;
+    height: 96px;
+    margin-left: 10px;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}
+
+.small_pic ul li img {
+    width: 120px;
+    height: 96px;
+}
+
+.mark_left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background-color: red;
+    opacity: 0;
+    filter: alpha(opacity= 0);
+    z-index: 3001;
+    cursor: pointer;
+}
+
+.mark_right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background-color: red;
+    opacity: 0;
+    filter: alpha(opacity= 0);
+    z-index: 3001;
+    cursor: pointer;
+}

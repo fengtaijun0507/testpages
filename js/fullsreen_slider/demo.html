@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+</head>
+<style type="text/css">
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+html,
+body,
+.sections,
+.section,
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+html,
+body,
+.sections,
+.section,
+#container {
+    overflow: hidden;
+    position: relative;
+}
+.section {
+    background-color: #000000;
+    background-size: cover;
+    -webkit-background-size: cover;
+    background-position: center center;
+    text-align: center;
+    color: #000000;
+}
+
+#section0 {
+    background-image: url(imges/1.jpg);
+}
+
+#section1 {
+    background-image: url(imges/2.jpg);
+}
+
+#section2 {
+    background-image: url(imges/3.jpg);
+}
+
+#section3 {
+    background-image: url(imges/4.jpg);
+}
+
+#pages {
+    position: fixed;
+}
+
+.horizontal {
+    bottom: 20px;
+    left: 50%;
+    width: 80px;
+    margin-left: -40px;
+}
+
+.vertical {
+    top: 50%;
+    right: 10px;
+    height: 80px;
+    margin-top: -40px;
+}
+
+#pages li.active {
+    width: 8px;
+    height: 8px;
+    background: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+#pages li {
+    float: left;
+    width: 6px;
+    height: 6px;
+    background: none;
+    border: 2px solid #B3ED13;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    margin-left: 10px;
+}
+
+.left {
+    float: left;
+}
+
+h3{
+position:relative;
+top:50%;
+font-size:200%;
+text-align: center;
+vertical-align: middle;
+
+}
+</style>
+
+<body>
+    <div id="container">
+        <div class="sections">
+            <div class="section" id="section0">
+                <h3>This is a my first js plugin；With a type.js ，would be better</h3>
+            </div>
+            <div class="section" id="section1">
+                <h3>this is a section</h3>
+            </div>
+            <div class="section" id="section2">
+                <h3>this is a section</h3>
+            </div>
+            <div class="section" id="section3">
+                <h3>this is a section</h3>
+            </div>
+        </div>
+    </div>
+    <ul class="horizontal" id="pages">
+        <li class="item active"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+    </ul>
+</body>
+<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="solider.js"></script>
+<script type="text/javascript">
+$("#container").pageSlider({
+    domStructure: {
+        container: "#container",
+        sections: ".sections",
+        section: ".section",
+        pages: "#pages",
+        item: ".item",
+        active: ".active"
+    },
+    direction: "horizontal",
+    timingFunction: "ease-in",
+    duration: "500",
+    loop: "false",
+    pagination: "true",
+    keyboard: "true",
+    index: "0",
+    callback: ""
+
+})
+</script>
+
+</html>
