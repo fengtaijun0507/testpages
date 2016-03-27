@@ -168,18 +168,23 @@
             return index;
         },
         _addDisabled: function() {
-            if (this.index === 0) {
+            if (this.index === 0 && this.index !== this.groupData.length - 1) {
                 this.preBtn.addClass("disabled").removeClass("photo_pre_btn_show");
                 this.nextBtn.removeClass("disabled");
-            } else if (this.index === this.groupData.length - 1) {
+            }
+            if (this.index !== 0 && this.index === this.groupData.length - 1) {
                 this.preBtn.removeClass("disabled");
                 this.nextBtn.addClass("disabled").removeClass("photo_next_btn_show");
-
-            } else {
+            }
+            if (this.index === 0 && this.index === this.groupData.length - 1) {
+                this.preBtn.addClass("disabled").removeClass("photo_pre_btn_show");
+                this.nextBtn.addClass("disabled").removeClass("photo_next_btn_show");
+            }
+            if (this.index !== 0 && this.index !== this.groupData.length - 1) {
                 this.preBtn.removeClass("disabled");
                 this.nextBtn.removeClass("disabled");
-
             }
+
         },
         loadPicSize: function(sourceSrc) {
             var self = this;
@@ -239,7 +244,7 @@
                         height: height - 10
                     }).fadeIn();
                     self.captionArea.fadeIn();
-                    self.flag=true;
+                    self.flag = true;
                 })
                 //设置描述文字和索引
             this.captionText.text(this.groupData[this.index].caption);
