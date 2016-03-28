@@ -73,9 +73,9 @@
             event.stopPropagation();
             if (!$(this).hasClass("disabled") && $(this).hasClass("photo_pre_btn") && self.flag) {
                 self.flag = false;
-                self.goTo("pre");
+                self._goTo("pre");
             } else if (!$(this).hasClass("disabled") && $(this).hasClass("photo_next_btn") && self.flag) {
-                self.goTo("next");
+                self._goTo("next");
                 self.flag = false;
 
             }
@@ -84,6 +84,7 @@
 
     };
     lightBox.prototype = {
+        constructor:lightBox,
         renderDOM: function() {
             var stringDom = '<div class="photo">' +
                 '<img class="photo_image" src="">' +
@@ -150,14 +151,14 @@
             }).animate({
                 top: (winHeight / 2 - 10) / 2
             }, function() {
-                self.loadPicSize(sourceSrc);
+                self._loadPicSize(sourceSrc);
             });
 
-            this.index = this.getIndexof(curId);
+            this.index = this._getIndexof(curId);
             this._addDisabled();
 
         },
-        getIndexof: function(curId) {
+        _getIndexof: function(curId) {
             var index = 0;
             $.each(this.groupData, function(i, value) {
 
@@ -186,23 +187,23 @@
             }
 
         },
-        loadPicSize: function(sourceSrc) {
+        _loadPicSize: function(sourceSrc) {
             var self = this;
             self.popPic.css({
                 width: "auto",
                 height: "auto",
                 display: "none"
             })
-            this.preLoadImg(sourceSrc, function() {
+            this._preLoadImg(sourceSrc, function() {
 
                 self.popPic.attr({
                     "src": sourceSrc
                 });
-                self.changePicSize(self.popPic.width(), self.popPic.height())
+                self._changePicSize(self.popPic.width(), self.popPic.height())
             })
 
         },
-        preLoadImg: function(src, callback) {
+        _preLoadImg: function(src, callback) {
             var img = new Image();
             if (!!window.ActiveXObject) {
                 img.onreadystatechange = function() {
@@ -217,7 +218,7 @@
             };
             img.src = src;
         },
-        changePicSize: function(width, height) {
+        _changePicSize: function(width, height) {
             var self = this;
             var winHeight = $(window).height(),
                 winWidth = $(window).width();
@@ -251,17 +252,17 @@
             this.curIndex.text("当前索引: " + (this.index + 1) + "/" + this.groupData.length);
 
         },
-        goTo: function(dire) {
+        _goTo: function(dire) {
             if (dire == "pre") {
                 this.index--;
                 this._addDisabled();
-                this.loadPicSize(this.groupData[this.index].src);
+                this._loadPicSize(this.groupData[this.index].src);
 
 
             } else {
                 this.index++;
                 this._addDisabled();
-                this.loadPicSize(this.groupData[this.index].src);
+                this._loadPicSize(this.groupData[this.index].src);
             }
 
         }
